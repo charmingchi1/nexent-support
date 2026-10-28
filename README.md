@@ -31,7 +31,7 @@
 | `tmp_base/Nexent平台部署FAQ-复刻.md` | FAQ 完整复刻（含末尾「本地沉淀区」） | 每日 faq 阶段，自飞书 wiki |
 | `tmp_base/资源索引.md` | 同步状态 + 全部资源链接（勿手改） | 每次同步自动重建 |
 | `tmp_base/rec_*.ndjson` `fields_*.json` | 项目管理一张表 6 张 Base 表缓存 | 每日 base 阶段 |
-| `tmp_base/现网问题个人跟踪_*.csv` | 个人跟踪电子表格缓存 | 每日 sheet 阶段 |
+| `tmp_base/现网支撑记录_*.csv` | 现网支撑记录电子表格缓存 | 每日 sheet 阶段 |
 | `tmp_base/pending/` | 表格写操作待推送队列 | table-write.mjs 入队 |
 | `nexent/` | nexent 代码仓（develop） | 自行 clone，见步骤 4 |
 | `scripts/sync/state/` | 同步运行日志与状态 | 脚本自动落盘 |
@@ -45,13 +45,21 @@
 
 ## 安装步骤（按序执行）
 
-### 1. 克隆本仓库作为工作区根
+### 1. 确定工作区根目录并克隆本仓库
 
-技能与脚本内为绝对路径，**建议固定用 `D:\projects\feishu`**；换盘符/目录需同步改 `scripts/sync/sync-config.json` 的 `git.repo`、`lark_cli_entry` 及自动化 prompt 中的路径。
+安装时先**询问用户**工作区根目录放在哪里（下文以 `<工作区根目录>` 代称），然后克隆：
 
 ```bash
-git clone https://github.com/charmingchi1/nexent-support.git "D:/projects/feishu"
+git clone https://github.com/charmingchi1/nexent-support.git "<工作区根目录>"
 ```
+
+技能与脚本内为**绝对路径**，布置路径与开发机不同时，需同步修改以下文件：
+
+| 文件 | 要改的位置 |
+|------|-----------|
+| `scripts/sync/sync-config.json` | `lark_cli_entry`（npm 全局路径因机而异）、`git.repo`（代码仓绝对路径） |
+| `.agents/skills/nexent-support/SKILL.md` 与 `references/` | 文中所有指向旧根目录的绝对路径 → 新 `<工作区根目录>` |
+| 自动化 prompt（步骤 7 重建时） | 其中的同步脚本与索引路径 |
 
 ### 2. 安装并授权 lark-cli
 
@@ -73,13 +81,13 @@ lark-cli auth status    # 核对身份与有效期
 ### 4. 克隆 nexent 代码仓
 
 ```bash
-git clone https://github.com/ModelEngine-Group/nexent.git "D:/projects/feishu/nexent"
-git -C "D:/projects/feishu/nexent" checkout develop
-git -C "D:/projects/feishu/nexent" branch --set-upstream-to=origin/develop develop
+git clone https://github.com/ModelEngine-Group/nexent.git "<工作区根目录>/nexent"
+git -C "<工作区根目录>/nexent" checkout develop
+git -C "<工作区根目录>/nexent" branch --set-upstream-to=origin/develop develop
 ```
 
 之后无需手动更新——每日同步的 git 阶段自动 `fetch` + `pull --ff-only`。克隆慢时先配 Git 代理。
-⚠️ 只用 `<工作区>/nexent`；`D:\projects\nexent` 是旧副本，检索会命中过时逻辑，勿用。
+⚠️ 只用 `<工作区根目录>/nexent`；工作区外若有历史遗留的旧副本（如上级目录同名仓），检索会命中过时逻辑，勿用。
 
 ### 5. 首次同步（生成全部本地缓存）
 
@@ -96,7 +104,7 @@ node scripts/sync/sync-all.mjs                  # 全量：push→git→faq→ba
 
 ### 7. （可选）重建每日 08:30 自动化
 
-对 ZCode 说「**每天 08:30 创建自动化**」，要点：运行 `node "D:/projects/feishu/scripts/sync/sync-all.mjs"`（超时给足 10 分钟）→ 读 `tmp_base/资源索引.md` 汇报关键版本与失败项（授权失效提示重跑 `lark-cli auth login`）→ 除脚本内置 push 外不得调用任何飞书写命令、不改 FAQ 沉淀区、push_attempts ≥3 提醒人工。完整 prompt 见资料包《配置指南.md》§4.2（注意其中资源索引路径为旧版根目录，现为 `tmp_base/资源索引.md`）。
+对 ZCode 说「**每天 08:30 创建自动化**」，要点：运行 `node "<工作区根目录>/scripts/sync/sync-all.mjs"`（超时给足 10 分钟）→ 读 `tmp_base/资源索引.md` 汇报关键版本与失败项（授权失效提示重跑 `lark-cli auth login`）→ 除脚本内置 push 外不得调用任何飞书写命令、不改 FAQ 沉淀区、push_attempts ≥3 提醒人工。完整 prompt 见资料包《配置指南.md》§4.2（注意其中资源索引路径为旧版根目录，现为 `tmp_base/资源索引.md`）。
 
 ## 日常使用速查
 

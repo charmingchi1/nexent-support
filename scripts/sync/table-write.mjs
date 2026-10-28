@@ -11,8 +11,8 @@
  *                      --json '{"问题描述":"...","问题局点":["华西医院"],"责任模块":["模型管理"],"问题发现版本":["v2.7.0"]}' \
  *                      --confirm-note "双确认完成：内容确认+操作允许（2026-10-20）"
  *   入队（更新记录） 同上，加 --record-id recvXXXX
- *   入队（跟踪表追加行） node table-write.mjs --op sheet-append --sheet-id qQKCIP \
- *                      --row '["2026年10月20日","张三","事件一句话","结论一句话","否","易"]' \
+ *   入队（跟踪表追加行） node table-write.mjs --op sheet-append --sheet-id 081adc \
+ *                      --row '["2026年10月28日","张三","华西","事件一句话","结论一句话","否","易"]' \
  *                      --confirm-note "..."
  *   查看            node table-write.mjs --list [--all]
  *   撤销            node table-write.mjs --cancel <id>   （仅「待推送」可撤）
@@ -139,14 +139,14 @@ if (op === 'record') {
   const sheetId = argvOf('--sheet-id');
   let row;
   try { row = JSON.parse(argvOf('--row') || ''); } catch { console.error('❌ --row 不是合法 JSON'); process.exit(1); }
-  if (!sheetId) { console.error('❌ 缺少 --sheet-id（现网问题个人跟踪：9月=d35025，10月=qQKCIP；新月份先 +workbook-info 确认）'); process.exit(1); }
-  if (!Array.isArray(row) || row.length !== 6 || row.some((c) => typeof c !== 'string')) {
-    console.error('❌ --row 需为 6 个字符串的数组（A=时间 B=人员 C=事件 D=结论 E=是否闭环 F=修复难度）');
+  if (!sheetId) { console.error('❌ 缺少 --sheet-id（现网支撑记录：如 2026年10月=081adc；新子表先 lark-cli sheets +workbook-info 确认）'); process.exit(1); }
+  if (!Array.isArray(row) || row.length !== 7 || row.some((c) => typeof c !== 'string')) {
+    console.error('❌ --row 需为 7 个字符串的数组（A=时间 B=问题来源人 C=问题局点 D=事件 E=结论 F=是否闭环 G=修复难度）');
     process.exit(1);
   }
   const DIFFS = ['待评估', '易', '中', '难'];
-  if (!DIFFS.includes(row[5])) {
-    console.error(`❌ F 列修复难度限 ${DIFFS.join('/')}（当前：${row[5]}）`);
+  if (!DIFFS.includes(row[6])) {
+    console.error(`❌ G 列修复难度限 ${DIFFS.join('/')}（当前：${row[6]}）`);
     process.exit(1);
   }
   enqueue('sheet-append', { sheet_id: sheetId, name: CONFIG.sheet.name }, { row }, confirmNote);

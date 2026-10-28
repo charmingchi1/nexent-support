@@ -313,7 +313,7 @@ function pushSheetAppendItem(item) {
     const row = firstEmptyRowOf(data.annotated_csv ?? data.csv ?? '');
     const r2 = lark(['sheets', '+cells-set', '--as', 'user',
       '--spreadsheet-token', cfg.spreadsheet_token, '--sheet-id', item.target.sheet_id,
-      '--range', `A${row}:F${row}`,
+      '--range', `A${row}:G${row}`,
       '--cells', JSON.stringify([item.payload.row.map((v) => ({ value: v }))]),
       '--allow-overwrite=false'], 120000);
     const env2 = r2.status === 0 ? parseEnvelope(r2.stdout) : null;

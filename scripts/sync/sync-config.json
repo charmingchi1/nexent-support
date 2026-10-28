@@ -27,10 +27,10 @@
     ]
   },
   "sheet": {
-    "name": "现网问题个人跟踪",
-    "spreadsheet_token": "VbOls1o8phIjLJtqYhTcbbM6nPf",
-    "wiki_url": "https://dcnjvn24oieg.feishu.cn/wiki/Eo97wa7BgiSQ2nkmrL2cD8Yansf",
+    "name": "现网支撑记录",
+    "spreadsheet_token": "Yfm4sYHKhh5ZhOtijtIcBx7knVe",
+    "wiki_url": "https://dcnvjn24oieg.feishu.cn/wiki/HFM7w9TMmi08qVk2vRycb2TZnOc",
     "output_dir": "tmp_base",
-    "output_prefix": "现网问题个人跟踪"
+    "output_prefix": "现网支撑记录"
   }
 }

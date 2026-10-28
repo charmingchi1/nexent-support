@@ -116,16 +116,16 @@ node D:/projects/feishu/scripts/sync/table-write.mjs --op record \
 
 双确认话术：内容确认 = 「以下登记内容请与提交人核对：…确认无误请回复'可以提交'」；操作允许 = 用户明确回复同意后执行入队（凭证写入 --confirm-note）。飞书写入由每日 08:30 同步批量推送，推送结果（记录链接/失败原因）见 `D:\projects\feishu\tmp_base\资源索引.md`「本地待推送队列」。
 
-## 五、个人跟踪表列结构与修复难度（2026-10-20 起）
+## 五、个人跟踪表列结构与修复难度（2026-10-28 迁移《现网支撑记录》新表起）
 
-《现网问题个人跟踪》列结构：A=时间 B=人员 C=事件 D=结论 E=是否闭环 **F=修复难度**（待评估/易/中/难；仅支撑评估，评估四问与跟进联动见定性规范 v2 §8）。历史行不回填，新行起生效。
+《现网支撑记录》（https://dcnvjn24oieg.feishu.cn/wiki/HFM7w9TMmi08qVk2vRycb2TZnOc ）列结构：A=时间 B=问题来源人 C=问题局点 D=事件 E=结论 F=是否闭环 **G=修复难度**（待评估/易/中/难；仅支撑评估，评估四问与跟进联动见定性规范 v2 §8）。历史数据在旧表《现网问题个人跟踪》，新表不回填，新行起生效。
 
-追加行（6 列，本地入队随周期推送）：
+追加行（7 列，本地入队随周期推送；子表 sheet_id 变动时用 `lark-cli sheets +workbook-info --spreadsheet-token Yfm4sYHKhh5ZhOtijtIcBx7knVe` 查询）：
 
 ```bash
 node D:/projects/feishu/scripts/sync/table-write.mjs --op sheet-append \
-  --sheet-id qQKCIP \
-  --row '["2026年10月20日","张三","事件一句话","结论一句话","否","易"]' \
+  --sheet-id 081adc \
+  --row '["2026年10月28日","张三","华西","事件一句话","结论一句话","否","易"]' \
   --confirm-note "双确认完成：内容确认+操作允许（<日期>）"
 ```
 
