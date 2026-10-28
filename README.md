@@ -39,7 +39,7 @@
 ## 环境要求
 
 - Windows + Git + Node.js ≥ 18
-- [ZCode](https://zcode) （技能宿主；技能位于工作区 `.agents/skills/` 即自动识别）
+- ZCode（技能宿主；技能位于工作区 `.agents/skills/` 即自动识别）
 - lark-cli ≥ 1.0.97：`npm install -g @larksuite/cli`
 - 飞书自建应用 App ID：向前任支撑/主管索取（凭据不入库）
 
