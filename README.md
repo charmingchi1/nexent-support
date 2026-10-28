@@ -39,7 +39,7 @@
 ## 环境要求
 
 - Windows + Git + Node.js ≥ 18
-- agent 平台（技能宿主；支持工作区 `.agents/skills/` 技能目录即可，如 ZCode）
+- agent 平台（技能宿主；支持工作区 `.agents/skills/` 技能目录即可）
 - lark-cli ≥ 1.0.97：`npm install -g @larksuite/cli`
 
 ## 安装步骤（按序执行）
@@ -103,9 +103,9 @@ node scripts/sync/sync-all.mjs                  # 全量：push→git→faq→ba
 
 在 agent 平台打开工作区会话，丢一个模拟问题（如「Supabase 初始化失败 can't start new thread」），应走完 ①受理补要素 → ②检索 → ④给出带模板的答复话术；在 `tmp_base/Nexent平台部署FAQ-复刻.md` 全文搜索已知关键词应命中。
 
-### 7. （可选）重建每日 08:30 自动化
+### 7. 重建每日 08:30 自动化
 
-用 agent 平台的定时任务能力（如 ZCode 自动化、Windows 任务计划）每天 08:30 运行同步，完整 prompt 要点如下（自动化只调脚本、读索引汇报，硬约束：除内置 push 外不写飞书）：
+用 agent 平台的定时任务能力每天 08:30 运行同步，以下自动化提示词可直接交给 agent 平台创建定时任务：
 
 ```text
 执行 Nexent 支撑资源每日同步与待推送队列推送：
