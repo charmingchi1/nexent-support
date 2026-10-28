@@ -1,0 +1,36 @@
+{
+  "lark_cli_entry": "C:/Users/29348/AppData/Roaming/npm/node_modules/@larksuite/cli/scripts/run.js",
+  "git": {
+    "name": "nexent 代码仓 (develop)",
+    "repo": "D:/projects/feishu/nexent",
+    "branch": "develop",
+    "remote": "origin",
+    "web_url": "https://github.com/ModelEngine-Group/nexent"
+  },
+  "faq": {
+    "name": "Nexent 平台部署 FAQ",
+    "wiki_url": "https://dcnvjn24oieg.feishu.cn/wiki/IYhBwW2P9i51rZkLSIRcIZvNnoc",
+    "doc_id": "D1QmdcttPopHnLxp8EIcUfxZnkg",
+    "output": "Nexent平台部署FAQ-复刻.md"
+  },
+  "base": {
+    "name": "项目管理一张表",
+    "base_token": "RZWmboFEAaqVJHsJPY0cHDaantg",
+    "wiki_entry": "https://dcnvjn24oieg.feishu.cn/wiki/UPjNwsyrQin87skAs3scYNabnOb",
+    "tables": [
+      { "table_id": "tblJBN6zLUOtxH1k", "name": "1 需求池", "output": "tmp_base/rec_1需求池.ndjson" },
+      { "table_id": "tblBMbkDZi7LIG2A", "name": "2 版本开发计划", "output": "tmp_base/rec_2版本开发计划.ndjson" },
+      { "table_id": "tbleCKbGHEEDvc32", "name": "3 问题跟踪(新)", "output": "tmp_base/rec_3问题跟踪.ndjson", "view": "vewVwMjmKW" },
+      { "table_id": "tblPI67uirH7pvzD", "name": "4 发布版本", "output": "tmp_base/rec_4发布版本.ndjson" },
+      { "table_id": "tblfNUyuitumOZek", "name": "5 特性负责制", "output": "tmp_base/rec_5特性负责制.ndjson" },
+      { "table_id": "tblkVMkaBcwYtkcE", "name": "项目汇总", "output": "tmp_base/rec_项目汇总.ndjson" }
+    ]
+  },
+  "sheet": {
+    "name": "现网问题个人跟踪",
+    "spreadsheet_token": "VbOls1o8phIjLJtqYhTcbbM6nPf",
+    "wiki_url": "https://dcnjvn24oieg.feishu.cn/wiki/Eo97wa7BgiSQ2nkmrL2cD8Yansf",
+    "output_dir": "tmp_base",
+    "output_prefix": "现网问题个人跟踪"
+  }
+}

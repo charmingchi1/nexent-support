@@ -1,0 +1,24 @@
+# ===== 白名单式忽略：默认忽略所有内容，仅放行 nexent-support 技能及其依赖 =====
+# 防止误提交临时文件与敏感信息（二维码、客户端配置等）
+/*
+
+!.gitignore
+
+# nexent-support 技能本体
+!/.agents/
+/.agents/*
+!/.agents/skills/
+/.agents/skills/*
+!/.agents/skills/nexent-support/
+
+# 技能依赖的同步脚本（state/ 为运行日志与状态缓存，不入库）
+!/scripts/
+/scripts/*
+!/scripts/sync/
+/scripts/sync/state/
+
+# 技能引用的支撑文档
+!/资源索引.md
+!/Nexent支撑定性规范v2.md
+!/Nexent已知限制清单.md
+!/Nexent平台部署FAQ-复刻.md
