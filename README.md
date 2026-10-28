@@ -17,12 +17,26 @@
 ## 仓库内容
 
 ```
-├── .agents/skills/nexent-support/   技能本体（SKILL.md + references/：faq-quick、templates、duty-map）
+├── .agents/skills/nexent-support/   技能本体（SKILL.md + references/：faq-quick、templates、duty-map、hotfix）
 ├── scripts/sync/                    同步脚本（sync-all.mjs / table-write.mjs / sync-config.json / sync.cmd）
-├── Nexent支撑定性规范v2.md           ③定性判定树完整规范（手工维护）
-├── Nexent已知限制清单.md             ⑦沉淀「暂不支持」类答复必查（手工维护）
+├── docs/                            支撑文档（见下表）
+├── config.example.json              环境值脱敏模板（复制为 config.json，后者不入库）
 └── .gitignore                       白名单模式：以上之外默认不入库
 ```
+
+**docs/ 文档索引**：
+
+| 文档 | 用途 |
+|------|------|
+| 配置指南.md | 环境搭建深度指南（代码仓 / 飞书 CLI / 同步脚本 / 自动化 / 换机迁移 / 冒烟测试 / 排错） |
+| Nexent支撑定性规范v2.md | ③ 定性判定树完整规范（流程图 / 路由表 / 边界细则 / 修复难度评估） |
+| Nexent支撑流程指导书.md | 七步流程日常执行手册（可打印带入内网） |
+| Nexent现网支撑新人指南.md | 新手上手第一篇（职责边界 / 资料地图 / 第一天路线图 / 术语表） |
+| Nexent点对点修复指南.md | 已确认 bug 的点对点修复参考 |
+| 热修复指南-A2A-ssl_verify-v2.6.1.md、热修复指南-zstd-Accept-Encoding-v2.4.0.md | 容器内热修复的实测案例（配套 `references/hotfix.md` SOP） |
+| A2A-证书校验开关-迁移指南.md | A2A 证书校验开关迁移操作指南 |
+| 项目管理一张表-结构总结.md | 问题跟踪表 26 字段含义（⑥ 登记起草对照） |
+| Nexent已知限制清单.md | ⑦「暂不支持」类答复必查（手工维护） |
 
 **不入库、由同步生成的运行时数据**（clone 后跑一次同步即全部恢复）：
 

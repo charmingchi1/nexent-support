@@ -3,8 +3,8 @@
 > 适用：显式 bug 已定位到容器内某个 Python 文件的一处改动、等不及官方版本时的**临时规避**；或用户明确要求「热修复 / hotfix / 在容器里改」。
 > 正式修复仍走⑤升级 + ⑥登记（双确认），官方修复合入后正常升级即替代热修，无需回滚。
 > 实测案例（换修复点时只替换第 2 步的 sed 模式，其余框架不变）：
-> - 《D:\projects\feishu\热修复指南-A2A-ssl_verify-v2.6.1.md》
-> - 《D:\projects\feishu\热修复指南-zstd-Accept-Encoding-v2.4.0.md》
+> - 《D:\projects\feishu\docs\热修复指南-A2A-ssl_verify-v2.6.1.md》
+> - 《D:\projects\feishu\docs\热修复指南-zstd-Accept-Encoding-v2.4.0.md》
 
 ## 关键事实（2026-10-19 核实，develop 与 v2.6.1 一致）
 
