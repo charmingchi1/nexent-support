@@ -85,7 +85,7 @@
 
 ## 四、登记字段规范（问题跟踪表，写前必读）
 
-目标表：`tbleCKbGHEEDvc32`（3 问题跟踪(新)）。
+目标表：`tbleCKbGHEEDvc32`（3 问题跟踪(新)，所在 Base `RZWmboFEAaqVJHsJPY0cHDaantg`，紧急直写 lark-cli 时需要；同 Base 另有 1需求池 `tblJBN6zLUOtxH1k` / 2版本开发计划 `tblBMbkDZi7LIG2A` / 4发布版本 `tblPI67uirH7pvzD` / 5特性负责制 `tblfNUyuitumOZek` / 项目汇总 `tblkVMkaBcwYtkcE`）。
 
 **起草规则（2026-10-13 丁驰确立）**：起草时**列出全部 26 个字段**，逐项标注「拟填值 / 不填+原因」——**不是所有字段都需要填**；实际写入 JSON 只含拟填字段。**必填 4 项：问题描述、问题局点、责任模块、问题发现版本**。排查中需防丢失的升级问题也可登记（备注注明「非确认bug」），不局限于已确认 bug。
 
@@ -111,7 +111,7 @@ node D:/projects/feishu/scripts/sync/table-write.mjs --op record \
   --table-id tbleCKbGHEEDvc32 \
   --json '{"问题描述":"...","问题局点":["华西医院"],"责任模块":["模型管理"],"优先级":["P1"],"预期修改版本":["Nexent 930"],"定位结论&解决方案":"初判：..."}' \
   --confirm-note "双确认完成：内容确认+操作允许（<日期>）"
-# 更新已有记录加 --record-id recvXXXX；个人跟踪表追加行用 --op sheet-append --row '["时间","人员","事件","结论","否"]'
+# 更新已有记录加 --record-id recvXXXX；支撑记录表（《现网支撑记录》，7 列）追加行命令见第五节
 ```
 
 双确认话术：内容确认 = 「以下登记内容请与提交人核对：…确认无误请回复'可以提交'」；操作允许 = 用户明确回复同意后执行入队（凭证写入 --confirm-note）。飞书写入由每日 08:30 同步批量推送，推送结果（记录链接/失败原因）见 `D:\projects\feishu\tmp_base\资源索引.md`「本地待推送队列」。

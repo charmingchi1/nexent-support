@@ -453,7 +453,7 @@ function buildIndex() {
   const md = [
     '# Nexent 支撑资源索引',
     '',
-    `> 本文件由 \`scripts/sync/sync-all.mjs\` 自动生成于 ${nowTs()}，勿手工编辑。定时同步：ZCode 自动化每天 08:30。`,
+    `> 本文件由 \`scripts/sync/sync-all.mjs\` 自动生成于 ${nowTs()}，勿手工编辑。定时同步：agent 平台定时任务每天 08:30。`,
     '',
     `**总体状态**：${overall}（${all.length - bad.length}/${all.length} 项成功）｜ **飞书授权**：${state.auth?.ok ? '✅ user 身份有效' : '❌ 已失效'} ${state.auth?.ok ? '' : '→ 见下方排错'}`,
     `**手动同步**：\`node scripts/sync/sync-all.mjs\`（可加 \`--only git|faq|base|sheet\`），或双击 \`scripts\\sync\\sync.cmd\``,

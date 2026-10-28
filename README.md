@@ -1,9 +1,9 @@
 # nexent-support — Nexent 项目支撑技能包
 
-一套跑在 ZCode 里的 Nexent 现网支撑工作环境：**支撑技能**（七步流程：受理补要素 → 检索 → 定性 → 答复/规避 → 升级 → 登记 → 沉淀）+ **每日自动同步脚本**（飞书 FAQ/多维表格/电子表格 → 本地缓存）+ **手工知识文档**。会话中说「华西又报错了」「这个怎么回」「帮我登记这个 bug」即自动接管。
+一套跑在 agent 平台里的 Nexent 现网支撑工作环境：**支撑技能**（七步流程：受理补要素 → 检索 → 定性 → 答复/规避 → 升级 → 登记 → 沉淀）+ **每日自动同步脚本**（飞书 FAQ/多维表格/电子表格 → 本地缓存）+ **手工知识文档**。会话中说「华西又报错了」「这个怎么回」「帮我登记这个 bug」即自动接管。
 
 ```
-┌─ ZCode 自动化（每天 08:30）─┐
+┌─ 定时自动化（每天 08:30）───┐
 │  「Nexent 支撑资源每日同步」 │──► node scripts/sync/sync-all.mjs ──┐
 └────────────────────────────┘                                    ▼
 ┌─ nexent-support 技能 ─┐   ┌─ 同步脚本（scripts/sync/）─┐   ┌─ 数据源 ────────────┐
@@ -39,9 +39,8 @@
 ## 环境要求
 
 - Windows + Git + Node.js ≥ 18
-- ZCode（技能宿主；技能位于工作区 `.agents/skills/` 即自动识别）
+- agent 平台（技能宿主；支持工作区 `.agents/skills/` 技能目录即可，如 ZCode）
 - lark-cli ≥ 1.0.97：`npm install -g @larksuite/cli`
-- 飞书自建应用 App ID：向前任支撑/主管索取（凭据不入库）
 
 ## 安装步骤（按序执行）
 
@@ -100,11 +99,11 @@ node scripts/sync/sync-all.mjs                  # 全量：push→git→faq→ba
 
 ### 6. 验证技能
 
-用 ZCode 打开工作区，丢一个模拟问题（如「Supabase 初始化失败 can't start new thread」），应走完 ①受理补要素 → ②检索 → ④给出带模板的答复话术；在 `tmp_base/Nexent平台部署FAQ-复刻.md` 全文搜索已知关键词应命中。
+在 agent 平台打开工作区会话，丢一个模拟问题（如「Supabase 初始化失败 can't start new thread」），应走完 ①受理补要素 → ②检索 → ④给出带模板的答复话术；在 `tmp_base/Nexent平台部署FAQ-复刻.md` 全文搜索已知关键词应命中。
 
 ### 7. （可选）重建每日 08:30 自动化
 
-对 ZCode 说「**每天 08:30 创建自动化**」，要点：运行 `node "<工作区根目录>/scripts/sync/sync-all.mjs"`（超时给足 10 分钟）→ 读 `tmp_base/资源索引.md` 汇报关键版本与失败项（授权失效提示重跑 `lark-cli auth login`）→ 除脚本内置 push 外不得调用任何飞书写命令、不改 FAQ 沉淀区、push_attempts ≥3 提醒人工。完整 prompt 见资料包《配置指南.md》§4.2（注意其中资源索引路径为旧版根目录，现为 `tmp_base/资源索引.md`）。
+用 agent 平台的定时任务能力（如 ZCode 自动化、Windows 任务计划）每天 08:30 运行同步，要点：运行 `node "<工作区根目录>/scripts/sync/sync-all.mjs"`（超时给足 10 分钟）→ 读 `tmp_base/资源索引.md` 汇报关键版本与失败项（授权失效提示重跑 `lark-cli auth login`）→ 除脚本内置 push 外不得调用任何飞书写命令、不改 FAQ 沉淀区、push_attempts ≥3 提醒人工。完整 prompt 见资料包《配置指南.md》§4.2（注意其中资源索引路径为旧版根目录，现为 `tmp_base/资源索引.md`）。
 
 ## 日常使用速查
 
@@ -128,7 +127,7 @@ node scripts/sync/table-write.mjs --cancel <id>                 # 撤销待推�
 | 报「找不到 lark-cli 入口」 | npm 全局路径变化 | 改 `sync-config.json` 的 `lark_cli_entry` 或设环境变量 `LARK_CLI_ENTRY` |
 | 某资源 ❌ 其他正常 | 单项容错，常见为远端权限变化 | 看 `tmp_base/资源索引.md` 失败详情 + `scripts/sync/state/` 当日日志，找资源所有者开权限 |
 | push 连续失败（attempts ≥3） | 字段值不合法/权限变化 | 看 `tmp_base/pending/` 各文件 `last_error`，修正后重新入队 |
-| 自动化没跑 | 关机 / ZCode 未启动 | 双击 `scripts\sync\sync.cmd` 手动补跑 |
+| 自动化没跑 | 关机 / agent 平台或计划任务未运行 | 双击 `scripts\sync\sync.cmd` 手动补跑 |
 
 ## 硬约束（详见 SKILL.md）
 
