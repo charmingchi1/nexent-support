@@ -17,8 +17,7 @@
 !/scripts/sync/
 /scripts/sync/state/
 
-# 技能引用的支撑文档
-!/资源索引.md
+# 技能引用的手工知识文档（同步生成的 FAQ 复刻与资源索引已统一收纳至
+# tmp_base/ —— 数据缓存不入库，可由 scripts/sync/sync-all.mjs 重新生成）
 !/Nexent支撑定性规范v2.md
 !/Nexent已知限制清单.md
-!/Nexent平台部署FAQ-复刻.md

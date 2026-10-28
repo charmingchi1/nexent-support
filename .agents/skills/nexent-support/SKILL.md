@@ -25,10 +25,10 @@ description: Nexent 项目支撑问题处理全流程：受理补齐八要素 �
 
 ## ② 检索：按序查三处
 
-**全部走本地缓存，不现场调飞书**（慢）。缓存由 `scripts/sync/sync-all.mjs` 每日 08:30 自动刷新，状态与各资源链接见 `D:\projects\feishu\资源索引.md`；若索引显示缓存超过 24h 且本次任务需要远端新数据，先跑 `node scripts/sync/sync-all.mjs` 刷新再检索（脚本只读，不会写飞书）。
+**全部走本地缓存，不现场调飞书**（慢）。缓存由 `scripts/sync/sync-all.mjs` 每日 08:30 自动刷新，状态与各资源链接见 `D:\projects\feishu\tmp_base\资源索引.md`；若索引显示缓存超过 24h 且本次任务需要远端新数据，先跑 `node scripts/sync/sync-all.mjs` 刷新再检索（脚本只读，不会写飞书）。
 
 1. **FAQ 速查**：读 `references/faq-quick.md`，按现象对号入座；命中即有现成解法，直接进入④；
-2. **完整 FAQ**：未命中时搜 `D:\projects\feishu\Nexent平台部署FAQ-复刻.md` 全文；
+2. **完整 FAQ**：未命中时搜 `D:\projects\feishu\tmp_base\Nexent平台部署FAQ-复刻.md` 全文；
 3. **代码仓定位**：按报错关键字/接口路径/日志特征在代码仓检索（主仓 `D:\projects\feishu\nexent`，2026-10-12 用户确认，develop 分支；上级目录 `D:\projects\nexent` 是旧副本勿用；不确定时先问用户）。定位结果用于③的责任模块归属。
 
 ## ③ 定性：判定树 v2（五分类终态 + 排查中状态）
@@ -84,7 +84,7 @@ node D:/projects/feishu/scripts/sync/table-write.mjs --op record \
 # 队列管理：--list 查看（--all 含已推送）｜ --cancel <id> 撤销（仅待推送可撤）
 ```
 
-推送与回执：每日 08:30 定时同步自动推送（手动 `node D:/projects/feishu/scripts/sync/sync-all.mjs --only push`）；推送结果（record_id/失败原因）见 `D:\projects\feishu\资源索引.md`「本地待推送队列」，把记录链接回执给用户。仅**紧急需即时落表**时才直写飞书：`lark-cli base +record-upsert ... --dry-run` 预览后去掉 --dry-run 真写（仍需双确认）。
+推送与回执：每日 08:30 定时同步自动推送（手动 `node D:/projects/feishu/scripts/sync/sync-all.mjs --only push`）；推送结果（record_id/失败原因）见 `D:\projects\feishu\tmp_base\资源索引.md`「本地待推送队列」，把记录链接回执给用户。仅**紧急需即时落表**时才直写飞书：`lark-cli base +record-upsert ... --dry-run` 预览后去掉 --dry-run 真写（仍需双确认）。
 
 字段规范（起草时列出全部 26 字段逐项标注「拟填/不填+原因」，必填 4 项：问题描述/问题局点/责任模块/问题发现版本）见 `references/templates.md` 第四节。注意：不是所有字段都要填——不要写系统字段（提交人/提交时间/当前状态公式等）和流程后置字段（解决进度/解决方式/验收确认/是否闭环）；用户字段需要 open_id（「5 特性负责制」表负责人列可查），没有就留空给负责人认领。
 
@@ -94,7 +94,7 @@ node D:/projects/feishu/scripts/sync/table-write.mjs --op record \
 
 - 答复后建议用户 24h 回访「是否解决」，未解决回③重新定性；
 - bug 修复期按「难度 × 优先级」跟进（规范 v2 §8.4）：P0/P1+难 专项跟踪每日过账、阻塞项上报；P0/P1+易/中 进晨报在修清单（含老化天数）；P2/P3+难 建议转需求池或挂起并注明难度理由；
-- 问题闭环时主动问一句：「这个案例要不要沉淀为 FAQ 新条目？」——按「现象/原因/解法」三段式追加到 `D:\projects\feishu\Nexent平台部署FAQ-复刻.md` **文件末尾「本地沉淀区」标记以下**（该区域每日同步时原样保留，不会被子刷新覆盖；更新前展示新增内容并获确认，已推回飞书 wiki 的条目从该区域删除）；
+- 问题闭环时主动问一句：「这个案例要不要沉淀为 FAQ 新条目？」——按「现象/原因/解法」三段式追加到 `D:\projects\feishu\tmp_base\Nexent平台部署FAQ-复刻.md` **文件末尾「本地沉淀区」标记以下**（该区域每日同步时原样保留，不会被子刷新覆盖；更新前展示新增内容并获确认，已推回飞书 wiki 的条目从该区域删除）；
 - 定性为【模型/能力限制】或【新需求（边界确认型）】且答复闭环时，**同批**把条目追加到 `D:\projects\feishu\Nexent已知限制清单.md`（格式见该文件头部与 v2 规范 §6）；
 - 答复含「暂不支持」的，把诉求追加到 v2 规范附录 B 需求线索池，供月度评审转需求池。
 

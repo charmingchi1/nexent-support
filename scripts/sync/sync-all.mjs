@@ -9,7 +9,7 @@
  *   base  — 项目管理一张表 6 张表 → tmp_base/*.ndjson（含 manifest/fields）
  *   sheet — 现网问题个人跟踪电子表格（自动发现全部子表）→ tmp_base/*.csv
  *
- * 状态落盘 scripts/sync/state/sync-state.json，并生成 资源索引.md。
+ * 状态落盘 scripts/sync/state/sync-state.json，并生成 tmp_base/资源索引.md。
  * 用法：node sync-all.mjs [--only push|git|faq|base|sheet]（逗号分隔可多选）[--push-dry-run 只打印将推送内容，不写飞书]
  */
 import { spawnSync } from 'node:child_process';
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const WORKSPACE = path.resolve(SCRIPT_DIR, '..', '..');
 const STATE_DIR = path.join(SCRIPT_DIR, 'state');
-const INDEX_PATH = path.join(WORKSPACE, '资源索引.md');
+const INDEX_PATH = path.join(WORKSPACE, 'tmp_base', '资源索引.md');
 const CONFIG = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, 'sync-config.json'), 'utf8'));
 const PENDING_DIR = path.join(WORKSPACE, 'tmp_base', 'pending');
 const PUSH_DRY = process.argv.includes('--push-dry-run');
@@ -594,7 +594,7 @@ function main() {
   const all = Object.values(state.resources);
   const bad = all.filter((r) => r.status === 'failed' || r.status === 'diverged');
   const skipN = all.filter((r) => r.status === 'skipped').length;
-  log(`=== 同步结束：${all.length - bad.length - skipN}/${all.length} 项成功${skipN ? `，${skipN} 项未执行` : ''}，索引已更新 → 资源索引.md ===`);
+  log(`=== 同步结束：${all.length - bad.length - skipN}/${all.length} 项成功${skipN ? `，${skipN} 项未执行` : ''}，索引已更新 → tmp_base/资源索引.md ===`);
   process.exit(bad.length ? 1 : 0);
 }
 

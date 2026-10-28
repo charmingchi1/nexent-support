@@ -1,6 +1,6 @@
 # 责任田映射（2026-10-12 源自「5 特性负责制」表）
 
-> 映射可能滞后：本地缓存副本 `D:\projects\feishu\tmp_base\rec_5特性负责制.ndjson` 由 `scripts/sync/sync-all.mjs` 每日 08:30 自动刷新（新鲜度见 `D:\projects\feishu\资源索引.md`）；升级前如需权威数据，仍可实时读表：
+> 映射可能滞后：本地缓存副本 `D:\projects\feishu\tmp_base\rec_5特性负责制.ndjson` 由 `scripts/sync/sync-all.mjs` 每日 08:30 自动刷新（新鲜度见 `D:\projects\feishu\tmp_base\资源索引.md`）；升级前如需权威数据，仍可实时读表：
 > `lark-cli base +record-list --as user --base-token RZWmboFEAaqVJHsJPY0cHDaantg --table-id tblfNUyuitumOZek --format ndjson`
 
 ## 智能体管理

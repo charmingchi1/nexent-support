@@ -20,7 +20,7 @@
  * 门禁：未带 --confirm-note（双确认凭证）的入队会被拒绝——「内容确认 + 操作允许」
  *       必须在入队前完成（支撑流程⑥），凭证原文随条目留痕。
  * 目标表必须是 sync-config.json 里登记过的表；推送结果（record_id / 失败原因）写回
- * 各 pending 文件并汇总到 资源索引.md「本地待推送队列」。
+ * 各 pending 文件并汇总到 tmp_base/资源索引.md「本地待推送队列」。
  */
 import fs from 'node:fs';
 import path from 'node:path';
