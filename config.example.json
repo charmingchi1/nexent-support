@@ -1,0 +1,59 @@
+{
+  "_说明": "Nexent 支撑环境配置 · 脱敏模板（可外传）。使用方法：复制本文件为 config.json，把 <占位符> 换成实际值。personal 类字段每人自己的；links/ids 为团队共用值，已直接填好。",
+  "person": {
+    "姓名": "<你的姓名>",
+    "user_open_id": "<你的飞书 open_id，lark-cli auth status 可查>",
+    "lark_app_id": "<飞书自建应用 App ID，向前任支撑/主管索取>",
+    "lark_cli_version": "<lark-cli --version 输出>",
+    "windows_用户目录": "C:/Users/<你的Windows用户名>"
+  },
+  "proxy": {
+    "http": "http://127.0.0.1:<代理端口>",
+    "https": "http://127.0.0.1:<代理端口>",
+    "备注": "仅 git 克隆/拉取慢时按需启用（配置指南 §1.3）；端口按本机代理软件实际值填写"
+  },
+  "paths": {
+    "workspace_root": "<工作区根目录，如 D:/projects/feishu>",
+    "nexent_repo": "<工作区>/nexent",
+    "nexent_branch": "develop",
+    "lark_cli_entry": "<npm全局路径>/node_modules/@larksuite/cli/scripts/run.js",
+    "sync_config": "<工作区>/scripts/sync/sync-config.json"
+  },
+  "links": {
+    "faq_wiki": "https://dcnvjn24oieg.feishu.cn/wiki/IYhBwW2P9i51rZkLSIRcIZvNnoc",
+    "base_wiki_项目管理一张表": "https://dcnvjn24oieg.feishu.cn/wiki/UPjNwsyrQin87skAs3scYNabnOb",
+    "problem_form_问题登记表单": "https://dcnvjn24oieg.feishu.cn/share/base/shrcn2bfegdmhXN2vflCq0hBDhc",
+    "nexent_github": "https://github.com/ModelEngine-Group/nexent",
+    "tracking_wiki_现网支撑记录": "<现网支撑记录 wiki URL>",
+    "tracking_wiki_旧表现网问题个人跟踪": "<旧表 wiki URL>"
+  },
+  "ids": {
+    "base_token": "RZWmboFEAaqVJHsJPY0cHDaantg",
+    "tables": {
+      "1需求池": "tblJBN6zLUOtxH1k",
+      "2版本开发计划": "tblBMbkDZi7LIG2A",
+      "3问题跟踪新": "tbleCKbGHEEDvc32",
+      "3问题跟踪新_视图": "vewVwMjmKW",
+      "4发布版本": "tblPI67uirH7pvzD",
+      "5特性负责制": "tblfNUyuitumOZek",
+      "项目汇总": "tblkVMkaBcwYtkcE"
+    },
+    "faq_doc_id": "D1QmdcttPopHnLxp8EIcUfxZnkg",
+    "tracking_spreadsheet_token": "<现网支撑记录 spreadsheet token>",
+    "tracking_sheets": {
+      "<月份>": "<sheet-id>"
+    },
+    "tracking_旧表归档_现网问题个人跟踪": {
+      "spreadsheet_token": "<旧表 token>",
+      "sheets": {
+        "<月份>": "<sheet-id>"
+      },
+      "note": "2026-10-28 前的历史数据，只读不再写入"
+    }
+  },
+  "automation": {
+    "title": "Nexent 支撑资源每日同步（每天 08:30）",
+    "cron": "30 8 * * *",
+    "重建prompt": "见 README.md 步骤 7"
+  }
+}

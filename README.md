@@ -77,6 +77,8 @@ lark-cli auth status    # 核对身份与有效期
 `%APPDATA%\npm\node_modules\@larksuite\cli\scripts\run.js`，脚本用 node 直调该 run.js）与
 `git.repo`（代码仓绝对路径）。其余字段（FAQ/Base/表格的 URL 与 ID）为团队共用值，一般不动。
 
+环境值登记：复制根目录 `config.example.json` 为 `config.json`，填入姓名/open_id/Windows 用户目录/代理端口等本机实际值（`config.json` 含个人信息，默认被 .gitignore 排除，勿提交；同步脚本只读 `sync-config.json`，`config.json` 供人查阅与换机对照）。
+
 ### 4. 克隆 nexent 代码仓
 
 ```bash
@@ -103,7 +105,25 @@ node scripts/sync/sync-all.mjs                  # 全量：push→git→faq→ba
 
 ### 7. （可选）重建每日 08:30 自动化
 
-用 agent 平台的定时任务能力（如 ZCode 自动化、Windows 任务计划）每天 08:30 运行同步，要点：运行 `node "<工作区根目录>/scripts/sync/sync-all.mjs"`（超时给足 10 分钟）→ 读 `tmp_base/资源索引.md` 汇报关键版本与失败项（授权失效提示重跑 `lark-cli auth login`）→ 除脚本内置 push 外不得调用任何飞书写命令、不改 FAQ 沉淀区、push_attempts ≥3 提醒人工。完整 prompt 见资料包《配置指南.md》§4.2（注意其中资源索引路径为旧版根目录，现为 `tmp_base/资源索引.md`）。
+用 agent 平台的定时任务能力（如 ZCode 自动化、Windows 任务计划）每天 08:30 运行同步，完整 prompt 要点如下（自动化只调脚本、读索引汇报，硬约束：除内置 push 外不写飞书）：
+
+```text
+执行 Nexent 支撑资源每日同步与待推送队列推送：
+
+1. 用 Bash 运行：node "<工作区根目录>/scripts/sync/sync-all.mjs"（超时给足 10 分钟）。
+   脚本第一阶段（push）会把 tmp_base/pending/ 中已双确认入队的表格写操作批量写入飞书
+   （这是本次唯一允许的飞书写操作，内容均为支撑流程⑥双确认后入队的既定写入），
+   随后执行只读同步（FAQ wiki 文档、项目管理一张表 6 张 Base 表、现网支撑记录电子表格、
+   nexent 仓 develop fast-forward），最后自动更新 <工作区根目录>/tmp_base/资源索引.md。
+2. 读取 <工作区根目录>/tmp_base/资源索引.md 的「总体状态」行、表格与「本地待推送队列」一节：
+   全部成功时用两三句话汇报关键版本及队列推送结果，不必逐项罗列；
+   若有失败项或飞书授权显示已失效，逐项列出失败资源与错误原因，并给出处理办法——
+   飞书授权失效时告知用户在终端运行 lark-cli auth login 重新授权后手动重跑同步。
+3. 除脚本内置 push 阶段外，不得调用任何其他飞书写命令（如手动 base +record-upsert）；
+   不得修改 FAQ 沉淀区（文件末尾标记以下内容）。
+   若某条待推送条目 push_attempts 已 ≥3（见 tmp_base/pending/ 各 JSON 文件），
+   在汇报中单独列出并提醒人工处理。
+```
 
 ## 日常使用速查
 
